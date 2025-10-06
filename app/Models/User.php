@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;           // Tokens OAuth2 (Passport)
-use Spatie\Permission\Traits\HasRoles;       // Roles/Permisos (Spatie)
+
+// Tokens OAuth2 (Laravel Passport)
+use Laravel\Passport\HasApiTokens;
+
+// Roles/Permisos (Spatie Permission)
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -14,9 +18,9 @@ class User extends Authenticatable
 
     /**
      * Guard por defecto para roles/permisos de Spatie.
-     * Ayuda a evitar errores de "guard mismatch" usando Passport (api).
+     * Coincide con Passport (auth:api) y evita "guard mismatch".
      */
-    protected $guard_name = 'api';
+    protected string $guard_name = 'api';
 
     /**
      * Atributos asignables en masa.
@@ -41,6 +45,7 @@ class User extends Authenticatable
 
     /**
      * Casts de atributos.
+     * - 'password' => 'hashed' aplica hash automáticamente al asignar.
      *
      * @return array<string, string>
      */

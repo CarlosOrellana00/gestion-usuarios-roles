@@ -15,5 +15,6 @@ Route::prefix('auth')->group(function () {
 
 // Rutas solo para ADMIN
 Route::middleware(['auth:api', 'role:admin'])->group(function () {
-    Route::get('users', [UserController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index']);
+    Route::post('/users', [UserController::class, 'store']); // <- nuevo
 });
